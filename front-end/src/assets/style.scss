@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 150ms;
+    font-family: 'Open Sans', sans-serif;
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: #222222;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #c5c1bf;
+        border-radius: 8px;
+    }
+}
+
+// CORES
+$black: #000000;
+$dark: #222222;
+$grey: #545454;
+$grey-hover: #3f3f3f;
+$medium_grey: #c5c1bf;
+$light_grey: #d0d4e2;
+$orange: #ff680a;
+$orange-hover: #af4300;
+$green: #00bf63;
+$red: #ff3131;
+$white: #ffffff;
+
+body {
+    background-color: $black;
+    color: $white;
+}
+
+// HEADER
+.header {
+    width: 100vw;
+    display: flex;
+    height: 9vh;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    &_backbutton {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: $orange;
+        color: $white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
+
+    &_backbutton:hover {
+        transform: scale(0.9);
+    }
+}
+
+// ELEMENTOS
+.main {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+
+// BOTÕES
+%button {
+    padding: 5px;
+    border-radius: 15px;
+    min-width: 90px;
+    min-height: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 2px;
+}
+
+.button-orange {
+    @extend %button;
+    background-color: $orange;
+    color: $white;
+}
+
+.button-orange:hover {
+    background-color: $orange-hover;
+}
+
+.button-grey {
+    @extend %button;
+    background-color: $grey;
+    color: $white;
+}
+
+.button-grey:hover {
+    background-color: $grey-hover;
+}
+
+.button-close {
+    background-color: $orange;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: $white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-close:hover {
+    background-color: $orange-hover;
+}
+
+// INPUTS
+%input {
+    background-color: $grey;
+    color: $medium_grey;
+    padding: 5px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+%input::placeholder {
+    color: $medium_grey;
+    font-weight: 400;
+}
+
+.input-general {
+    @extend %input;
+}
+
+.input-select {
+    @extend %input;
+
+    option {
+        font-weight: 900;
+    }
+}
+
+.input-textarea {
+    @extend %input;
+    max-height: 90px;
+}
+
+// MODAL
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #000000a9;
+
+    &_container {
+        background-color: $dark;
+    
+        border-radius: 15px;
+        min-width: 300px;
+        min-height: 300px;
+        position: relative;
+    
+        &_header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+    
+            h3 {
+                margin: 0 auto;
+            }
+        }
+    
+        &_body {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+    
+        &_footer {
+            position: relative;
+            bottom: 0px;
+            display: flex;
+            width: 100%;
+            justify-content: end;
+            padding: 10px;
+        }
+    }
+}
