@@ -1,3 +1,3 @@
 const route = 'http://localhost:5000';
-
-export{route}
+const frontRoute = 'http://localhost:3000';
+export{route, frontRoute}

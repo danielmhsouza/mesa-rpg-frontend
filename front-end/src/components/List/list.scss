@@ -1,0 +1,22 @@
+@import "../../assets/style.scss";
+.li{
+    padding: 5px;
+    background-color: $dark;
+    margin-bottom: 5px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: $medium_grey;
+
+    a{
+        text-decoration: none;
+        color: $orange;
+        font-size: 17px;
+        width: 100%;
+    }
+
+    :hover{
+        background-color: #111111;
+    }
+}
