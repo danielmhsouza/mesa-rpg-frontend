@@ -43,5 +43,31 @@ def user(id):
 
     return json.dumps(juser)
 
+
+@app.route('/cadastro', methods=['POST'])
+def cadastro():
+    data = request.get_json()
+
+    name = data.get('name')
+    email = data.get('email')
+    senha = data.get('pass')
+
+    cursor = db.cursor()
+    query = "SELECT * FROM user WHERE email = %s"
+    cursor.execute(query, (email))
+    res = cursor.fetchall()
+    db.commit()
+
+    if len(res) > 0:
+        return {"approved": "0"}
+    
+    cursor = db.cursor()
+    query = "INSERT INTO user (name, email, password) VALUES (%s, %s, %s)"
+    cursor.execute(query, (name, email, senha))
+    db.commit()
+    return {"approved": "1"}
+
+
+
 if __name__ == "__main__":
 	app.run(debug=True)

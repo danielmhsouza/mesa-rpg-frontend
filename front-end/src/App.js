@@ -9,6 +9,7 @@ import {
 import Teste from './pages/teste/teste';
 import Home from './pages/home/home';
 import Taverna from './pages/taverna/taverna';
+import Cadastro from './pages/cadastro/cadastro';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={<Navigate to='/home'></Navigate>} />
       <Route path='/home' element={<Home />} />
       <Route path='/taverna' element={<Taverna />} />
+      <Route path='/cadastro' element={<Cadastro />} />
     </Routes>
    </BrowserRouter>
   );

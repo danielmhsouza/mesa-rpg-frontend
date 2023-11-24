@@ -51,7 +51,7 @@ export default function Home() {
                             <h2>A plataforma mais maneira de RPG de mesa Online!</h2>
                             <p>A maioria das ferramentas que você precisa para jogar com seus amigos. <a href="/comofunciona" style={{ color: "orange" }}>Como funciona?</a></p>
                             <div>
-                                <button className="button-orange button-home">Cadastre-se</button>
+                                <button className="button-orange button-home" onClick={()=>{window.location.href = `${frontRoute}/cadastro`}}>Cadastre-se</button>
                             </div>
                         </div>
                         <div className="right-side">
