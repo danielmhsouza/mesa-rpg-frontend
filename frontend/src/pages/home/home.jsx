@@ -14,19 +14,13 @@ export default function Home() {
         setLoad(true);
 
         try {
-            let url = `${route}/login`;
+            let url = `${route}user/login.php?email=${email}&pass=${pass}`;
 
-            const response = await axios.post(url,
-                { "email": email, "pass": pass },
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+            const response = await axios.get(url);
             if (response.data.approved === "1") {
                 setError(false);
                 setError2(false);
-                sessionStorage.setItem("id", response.data.id);
+                sessionStorage.setItem('id', response.data.id)
                 window.location.href = `${frontRoute}/taverna`
             } else {
                 setError(true);
@@ -51,10 +45,17 @@ export default function Home() {
                             <h2>A plataforma mais maneira de RPG de mesa Online!</h2>
                             <p>A maioria das ferramentas que você precisa para jogar com seus amigos. <a href="/comofunciona" style={{ color: "orange" }}>Como funciona?</a></p>
                             <div>
-                                <button className="button-orange button-home" onClick={()=>{window.location.href = `${frontRoute}/cadastro`}}>Cadastre-se</button>
+                                <button className="button-orange button-home" onClick={() => { window.location.href = `${frontRoute}/cadastro` }}>Cadastre-se</button>
                             </div>
                         </div>
+
                         <div className="right-side">
+                            {
+                                sessionStorage.getItem('id') > 0 ?
+                                    <div className="entrar"><a href={`${frontRoute}/taverna`}>Entrar</a></div>
+                                    :
+                                    null
+                            }
                             <div className="container-login">
                                 <h3>Login</h3>
                                 <div className="inputs">

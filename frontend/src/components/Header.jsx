@@ -5,7 +5,7 @@ const Header = (props) => {
         <>
             <header className="header">
                 <a href={props.backto} className="header_backbutton">
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         arrow_back
                     </span>
                 </a>

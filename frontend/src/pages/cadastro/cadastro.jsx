@@ -21,23 +21,29 @@ const Cadastro = () => {
         setError(false);
 
         try {
-            let url = `${route}/cadastro`;
+            let url = `${route}user/cadastro.php`;
 
             const response = await axios.post(url,
                 {
-                    "name": name,
-                    "email": email,
-                    "pass": pass
+                    name: name,
+                    email: email,
+                    pass: pass,
+                    conf_pass: confPass
                 },
                 {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-            if (response.data.approved === "1") {
+                let i = response.data.indexOf('{');
+                let l = response.data.lastIndexOf('}')+1;
+                let res = response.data.substring(i, l);
+                let resp = JSON.parse(res);
+            if (resp.approved === "1") {
                 setError2(false);
                 window.location.href = `${frontRoute}/home`
             } else {
+                console.log(resp.msg);
                 setError2(true);
             }
         } catch (error) {

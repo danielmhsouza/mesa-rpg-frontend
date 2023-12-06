@@ -22,3 +22,25 @@
 .opcoes a:hover{
     text-decoration: underline;
 }
+
+%side{
+    width: 48%;
+    padding: 5px;
+}
+
+.campanha{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+
+    &_campanhas{
+        @extend %side;
+    }
+    
+    &_minhas-campanhas{
+        @extend %side;
+    }
+}
+
+
