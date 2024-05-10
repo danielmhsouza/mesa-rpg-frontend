@@ -1,46 +1,93 @@
 @import "../../assets/style.scss";
 
-.boasvindas{
+.boasvindas {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 5px;
 }
 
-.opcoes{
+.opcoes {
     width: 100%;
     height: 50px;
-    a{
+
+    a {
         color: $orange;
         margin: 5px;
         text-decoration: none;
         font-size: 17px;
-       
-    } 
-    
+
+    }
+
 }
-.opcoes a:hover{
+
+.opcoes a:hover {
     text-decoration: underline;
 }
 
-%side{
+%side {
     width: 48%;
     padding: 5px;
 }
 
-.campanha{
+.campanha {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
+    align-items: flex-start;
 
-    &_campanhas{
+    &_campanhas {
         @extend %side;
     }
-    
-    &_minhas-campanhas{
+
+    &_minhas-campanhas {
         @extend %side;
     }
 }
 
+%circle_button {
+    background-color: $orange;
+    border-radius: 100%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 
+.bottom-button {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    justify-content: space-evenly;
+    align-items: center;
+    user-select: none;
+    
+    &_item {
+        position: relative;
+        display: flex;
+        left: -25px;
+        a {
+            @extend %circle_button;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            text-decoration: none;
+            color: $white;
+            :hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    &_button {
+        @extend %circle_button;
+        width: 50px;
+        height: 50px;
+    }
+}

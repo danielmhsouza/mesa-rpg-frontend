@@ -56,7 +56,7 @@ const Cadastro = () => {
     return (
         <>
             <Loading run={load} />
-            <Header backto={'/home'} name={'Cadastro'} />
+            <Header backto={'/home'} name={'Cadastro'} arrow={true}/>
 
             <main className="main-cadastro">
                 <div className="form">

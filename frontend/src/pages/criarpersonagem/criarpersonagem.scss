@@ -1,0 +1,146 @@
+@import "../../assets/style.scss";
+
+.main {
+    display: flex;
+    align-items: center;
+
+    &_body {
+        background-color: $dark;
+        width: 600px;
+        padding: 16px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+
+        &_inputs {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+
+            &_left-side {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+
+                label {
+                    font-size: 12px;
+                }
+            }
+
+            &_right-side {
+                width: 50%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+
+                &_img {
+                    overflow: hidden;
+                    border-radius: 100%;
+                    width: 100px;
+                    height: 100px;
+                    background-color: $grey;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+        &_status {
+            width: 100%;
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-evenly;
+
+            &_side {
+                width: 47%;
+
+                &_st {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $grey;
+
+                    p {
+                        color: $orange;
+                    }
+                }
+            }
+        }
+
+        &_button{
+            width: 100%;
+            text-align: center;
+            margin-top: 16px;
+            padding: 8px;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main {
+
+        &_body {
+            width: 90%;
+
+            &_inputs {
+                input, select{
+                    height: 50px;
+                }
+                button{
+                    font-size: 20px;
+                }
+                &_left-side {
+                    width: 100%;
+
+                    label {
+                        font-size: 16px;
+                        margin-left: 5px;
+                    }
+                }
+
+                &_right-side {
+                    width: 100%;
+
+                    &_img {
+
+                        width: 150px;
+                        height: 150px;
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+
+            &_status {
+                flex-wrap: wrap;
+
+                &_side {
+                    width: 100%;
+
+                    &_st {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        border-bottom: 1px solid $grey;
+
+                        p {
+                            color: $orange;
+                        }
+                    }
+                }
+            }
+
+            &_button{
+                button{
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

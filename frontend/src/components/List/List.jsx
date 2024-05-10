@@ -6,7 +6,7 @@ const List = (props) => {
         <>
             {props.items.map((value) =>
                 <li className="li">
-                    <a href="#">
+                    <a href={value.href}>
                         {value.name}
                     </a> 
                     Código: {value.code}

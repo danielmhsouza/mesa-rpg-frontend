@@ -10,14 +10,7 @@
     background-size: cover;
 }
 
-@media screen and (max-width: 800px) {
-    .img-back{
-        height: auto;
-    }
-    .pelicula{
-        justify-content: center;
-    }
-}
+
 
 .pelicula {
     background: rgb(0, 0, 0);
@@ -27,22 +20,25 @@
     display: flex;
     flex-wrap: wrap;
 }
-%side{
+
+%side {
     height: 100%;
     padding: 10px;
     min-width: 350px
 }
 
-.left-side{
+
+.left-side {
     @extend %side;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-bottom: 25px;
     width: 40%;
 }
-.right-side{
+
+.right-side {
     @extend %side;
     width: 60%;
     display: flex;
@@ -50,25 +46,29 @@
     align-items: center;
     position: relative;
 }
+
 .entrar {
     position: absolute;
     top: 15px;
     right: 50px;
-    a{
+
+    a {
         color: $white;
     }
 }
-.button-home{
+
+.button-home {
     font-size: 30px;
     width: 300px;
 }
 
-.inputs{
+.inputs {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.container-login{
+
+.container-login {
     background-color: rgba(0, 0, 10, 0.712);
     border-radius: 15px;
     min-height: 250px;
@@ -81,8 +81,37 @@
     box-shadow: 0 0 15px #000000;
     padding: 15px;
 
-    p{
+    p {
         color: $red;
         font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .img-back {
+        height: auto;
+    }
+
+    .pelicula {
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .left-side,
+    .right-side {
+        height: 48%;
+    }
+    .left-side{
+        justify-content: space-between;
+    }
+    .container-login{
+        width: auto;
+    }
+    .container-login .button-orange{
+        font-size: 30px;
+    }
+    .inputs input{
+        width: 300px;
+        height: 50px;
     }
 }
