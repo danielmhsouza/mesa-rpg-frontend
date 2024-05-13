@@ -69,6 +69,13 @@ body {
         transform: scale(0.9);
     }
 }
+@media screen and (max-width: 800px) {
+    .header {
+        h1 {
+            font-size: 1.2em;
+        }
+    }
+}
 
 // ELEMENTOS
 .main {
@@ -137,6 +144,7 @@ body {
     border: none;
     border-radius: 15px;
     margin: 5px;
+    min-height: 36px;
 }
 
 %input::placeholder {

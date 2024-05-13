@@ -28,6 +28,10 @@
 %side {
     width: 48%;
     padding: 5px;
+
+    h3 {
+        font-size: 0.8em;
+    }
 }
 
 .campanha {
@@ -45,6 +49,7 @@
         @extend %side;
     }
 }
+
 
 %circle_button {
     background-color: $orange;

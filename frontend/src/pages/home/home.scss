@@ -1,117 +1,123 @@
 @import "../../assets/style.scss";
 
 
+%side {
+    height: 100%;
+    padding: 10px;
+    width: 49%;
+}
+
 .img-back {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
 
     background-image: url('../../assets/mago.png');
     background-repeat: no-repeat;
     background-size: cover;
-}
 
+    &_pelicula {
+        background: rgb(0, 0, 0);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.9318102240896359) 0%, rgba(0, 0, 23, 0.7413340336134453) 35%, rgba(0, 27, 32, 0.36878501400560226) 100%);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 16px;
 
+        &_left-side {
+            @extend %side;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding-bottom: 25px;
+            width: 40%;
 
-.pelicula {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.9318102240896359) 0%, rgba(0, 0, 23, 0.7413340336134453) 35%, rgba(0, 27, 32, 0.36878501400560226) 100%);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
+            &_button-home {
+                font-size: 1em;
+                width: 9em;
+            }
+        }
 
-%side {
-    height: 100%;
-    padding: 10px;
-    min-width: 350px
-}
+        &_right-side {
+            @extend %side;
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
 
+            &_entrar {
+                position: absolute;
+                top: 15px;
+                right: 50px;
 
-.left-side {
-    @extend %side;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding-bottom: 25px;
-    width: 40%;
-}
+                a {
+                    color: $white;
+                }
+            }
 
-.right-side {
-    @extend %side;
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
+            &_container-login {
+                background-color: rgba(0, 0, 10, 0.712);
+                border-radius: 15px;
+                min-height: 250px;
+                width: 300px;
+                backdrop-filter: blur(4px);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                text-align: center;
+                box-shadow: 0 0 15px #000000;
+                padding: 15px;
 
-.entrar {
-    position: absolute;
-    top: 15px;
-    right: 50px;
+                p {
+                    color: $red;
+                    font-weight: bold;
+                }
 
-    a {
-        color: $white;
+                &_inputs {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                }
+            }
+        }
+
     }
 }
 
-.button-home {
-    font-size: 30px;
-    width: 300px;
-}
 
-.inputs {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.container-login {
-    background-color: rgba(0, 0, 10, 0.712);
-    border-radius: 15px;
-    min-height: 250px;
-    width: 300px;
-    backdrop-filter: blur(4px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
-    box-shadow: 0 0 15px #000000;
-    padding: 15px;
-
-    p {
-        color: $red;
-        font-weight: bold;
-    }
-}
 
 @media screen and (max-width: 800px) {
+
     .img-back {
         height: auto;
-    }
+        position: relative;
 
-    .pelicula {
-        justify-content: center;
-        height: 100vh;
-    }
+        &_pelicula {
+            flex-direction: column;
+            height: 150vh;
+            padding-bottom: 0;
 
-    .left-side,
-    .right-side {
-        height: 48%;
-    }
-    .left-side{
-        justify-content: space-between;
-    }
-    .container-login{
-        width: auto;
-    }
-    .container-login .button-orange{
-        font-size: 30px;
-    }
-    .inputs input{
-        width: 300px;
-        height: 50px;
+            &_left-side {
+                width: 98%;
+                height: 50%;
+            }
+
+            &_right-side {
+                width: 98%;
+                height: 50%;
+                position: unset;
+
+                &_entrar {
+                    position: absolute;
+                    top: 20px;
+                    right: 50px;
+                    font-size: 1.2em;
+                }
+            }
+
+        }
     }
 }
