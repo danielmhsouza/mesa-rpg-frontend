@@ -1,0 +1,53 @@
+@import "../../assets/style.scss";
+
+.main{
+    &_dados-area {
+        margin-top: 16px;
+
+        &_dado {
+            background-color: $dark;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            width: 100px;
+            border-radius: 8px;
+
+            h4 {
+                color: $orange;
+            }
+        }
+
+        &_inputs {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            margin-bottom: 150px;
+            button {
+                font-size: 1.3em;
+            }
+
+            select {
+                height: 3em;
+                width: 5em;
+            }
+        }
+    }
+
+    &_add-button {
+        cursor: pointer;
+        width: 4em;
+        height: 4em;
+        background-color: $orange;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 15px;
+        right: 1em;
+    }
+}

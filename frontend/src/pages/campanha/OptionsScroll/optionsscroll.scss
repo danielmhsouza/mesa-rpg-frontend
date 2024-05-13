@@ -1,0 +1,55 @@
+@import "../../../assets/style.scss";
+
+.scroll {
+    padding: 5px;
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: center;
+
+    &_item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100px;
+        margin-left: 8px;
+
+        &_circle {
+            background-color: $light_grey;
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            color: $black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                font-size: 2em;
+            }
+        }
+
+        &_circle:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .scroll {
+        justify-content: flex-start;
+
+        &_item {
+            &_circle {
+
+                margin-bottom: 8px;
+            }
+        }
+    }
+}
