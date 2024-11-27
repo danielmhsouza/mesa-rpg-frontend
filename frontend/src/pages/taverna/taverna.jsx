@@ -14,26 +14,7 @@ const Taverna = () => {
     const [options, setOptions] = useState(false);
 
     useEffect(() => {
-        const fetchDataUser = async () => {
-            setLoad(true);
-
-            try {
-                let url = `${route}user/getuser.php?id=${sessionStorage.getItem('id')}`;
-                const response = await axios.get(url);
-                console.log(response);
-                if (response.data.approved == 0) {
-                    window.location = `${frontRoute}/home`;
-                }
-
-                setUser(response.data.user);
-            } catch (e) {
-                console.log(e);
-            }
-            setLoad(false);
-        }
-        fetchDataUser();
-
-
+        
     }, [])
 
     function openOptions() {

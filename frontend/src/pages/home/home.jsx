@@ -12,15 +12,15 @@ export default function Home() {
 
     async function login(email, pass) {
         setLoad(true);
-        window.location.href = `/taverna`
         try {
-            let url = `${route}user/login.php?email=${email}&pass=${pass}`;
-
-            const response = await axios.get(url);
-            if (response.data.approved === "1") {
+            let url = `${route}/login`;
+            
+            const response = await axios.post(url, {email: email, password: pass});
+            if (response.statusCode == 200) {
                 setError(false);
                 setError2(false);
-                sessionStorage.setItem('id', response.data.id)
+                sessionStorage.setItem('user_data', response.data)
+                window.location.href = `/taverna`
 
             } else {
                 setError(true);
