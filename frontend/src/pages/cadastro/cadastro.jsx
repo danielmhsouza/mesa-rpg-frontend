@@ -35,11 +35,11 @@ const Cadastro = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-            if (resp.statusCode == 200) {
+            if (response.statusCode == 200) {
                 setError2(false);
                 window.location.href = `${frontRoute}/home`
             } else {
-                console.log(resp.msg);
+                console.log(response.msg);
                 setError2(true);
             }
         } catch (error) {

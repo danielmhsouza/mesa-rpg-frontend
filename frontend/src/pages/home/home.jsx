@@ -16,10 +16,14 @@ export default function Home() {
             let url = `${route}/login`;
             
             const response = await axios.post(url, {email: email, password: pass});
-            if (response.statusCode == 200) {
+            if (response.data.user_id) {
                 setError(false);
                 setError2(false);
-                sessionStorage.setItem('user_data', response.data)
+                sessionStorage.setItem('user_id', response.data.user_id);
+                sessionStorage.setItem('user_name', response.data.user_name);
+                sessionStorage.setItem('email', response.data.email);
+                sessionStorage.setItem('created_campaign', response.data.created_campaign);
+                sessionStorage.setItem('entry_campaign', response.data.entry_campaign);
                 window.location.href = `/taverna`
 
             } else {
@@ -50,7 +54,7 @@ export default function Home() {
 
                     <div className="img-back_pelicula_right-side">
                         {
-                            true ?
+                            sessionStorage.getItem('user_id') ?
                                 <div className="img-back_pelicula_right-side_entrar"><a href={`/taverna`}>Entrar ►</a></div>
                                 :
                                 null

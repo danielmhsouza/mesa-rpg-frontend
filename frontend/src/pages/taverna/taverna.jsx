@@ -14,7 +14,13 @@ const Taverna = () => {
     const [options, setOptions] = useState(false);
 
     useEffect(() => {
+        setUser({
+            id: sessionStorage.getItem('user_id'),
+            name: sessionStorage.getItem('user_name')
+        })
+
         
+
     }, [])
 
     function openOptions() {
