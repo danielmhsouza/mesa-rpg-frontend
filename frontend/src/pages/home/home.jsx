@@ -15,15 +15,14 @@ export default function Home() {
         try {
             let url = `${route}/login`;
             
-            const response = await axios.post(url, {email: email, password: pass});
+            const response = await axios.post(url, {email: email, password: pass}, 
+                {headers:{'Content-Type': 'application/json'}});
             if (response.data.user_id) {
                 setError(false);
                 setError2(false);
                 sessionStorage.setItem('user_id', response.data.user_id);
                 sessionStorage.setItem('user_name', response.data.user_name);
                 sessionStorage.setItem('email', response.data.email);
-                sessionStorage.setItem('created_campaign', response.data.created_campaign);
-                sessionStorage.setItem('entry_campaign', response.data.entry_campaign);
                 window.location.href = `/taverna`
 
             } else {

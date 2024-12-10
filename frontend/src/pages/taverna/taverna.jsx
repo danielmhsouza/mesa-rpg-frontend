@@ -16,6 +16,9 @@ const Taverna = () => {
 
     // Busca os dados do usuário e as campanhas ao montar o componente
     useEffect(() => {
+        if(sessionStorage.getItem('entry_campaign')){
+            return
+        }
         const userId = sessionStorage.getItem("user_id");
         const userName = sessionStorage.getItem("user_name");
 
@@ -27,20 +30,23 @@ const Taverna = () => {
         }
     }, []);
 
-    // Função para buscar todas as campanhas do usuário
     const fetchCampaigns = async (userId) => {
         setLoad(true);
         try {
-            const response = await axios.get(`http://localhost:5001/campanhas-usuario?user_id=${userId}`);
+            const response = await axios.get(`${route}/campanhas-usuario?user_id=${userId}`, 
+            {headers:{'Content-Type': 'application/json'}});
             const data = response.data;
 
             console.log("Campanhas recebidas:", data);
 
-            setCampaigns(data); // Armazena todas as campanhas
+            setCampaigns(data);
 
             // Separar campanhas criadas (baseadas no user_id) e campanhas entradas
             const myCampaigns = data.filter(camp => camp.user_id.toString() === userId);
             const enteredCampaigns = data.filter(camp => camp.user_id.toString() !== userId);
+
+            sessionStorage.setItem('entry_campaign', JSON.stringify(enteredCampaigns));
+            sessionStorage.setItem('created_campaign', JSON.stringify(myCampaigns));
 
             setMyCamp(myCampaigns); // Campanhas criadas pelo usuário
             setCamp(enteredCampaigns); // Campanhas que o usuário participa
@@ -85,7 +91,7 @@ const Taverna = () => {
                                 items={camp.map(c => ({
                                     name: c.name,
                                     code: c.campaign_id,
-                                    href: `/campanha/${c.campaign_id}`
+                                    href: `/campanha`
                                 }))}
                             />
                         ) : (
