@@ -24,7 +24,7 @@ function App() {
       <Route path='/home' element={<Home />} />
       <Route path='/taverna' element={<Taverna />} />
       <Route path='/cadastro' element={<Cadastro />} />
-      <Route path='/campanha' element={<Campanha />} />
+      <Route path='/campanha/:campId/:isMaster' element={<Campanha />} />
       <Route path='/entrarcampanha' element={<EntrarCampanha />} />
       <Route path='/criarcampanha' element={<CriarCampanha />} />
       <Route path='/criarpersonagem' element={<CriarPersonagem />} />

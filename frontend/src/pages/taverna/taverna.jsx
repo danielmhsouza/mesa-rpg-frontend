@@ -16,7 +16,7 @@ const Taverna = () => {
 
     // Busca os dados do usuário e as campanhas ao montar o componente
     useEffect(() => {
-        if(sessionStorage.getItem('entry_campaign')){
+        if (sessionStorage.getItem('entry_campaign')) {
             return
         }
         const userId = sessionStorage.getItem("user_id");
@@ -33,8 +33,8 @@ const Taverna = () => {
     const fetchCampaigns = async (userId) => {
         setLoad(true);
         try {
-            const response = await axios.get(`${route}/campanhas-usuario?user_id=${userId}`, 
-            {headers:{'Content-Type': 'application/json'}});
+            const response = await axios.get(`${route}/campanhas-usuario?user_id=${userId}`,
+                { headers: { 'Content-Type': 'application/json' } });
             const data = response.data;
 
             console.log("Campanhas recebidas:", data);
@@ -91,7 +91,7 @@ const Taverna = () => {
                                 items={camp.map(c => ({
                                     name: c.name,
                                     code: c.campaign_id,
-                                    href: `/campanha`
+                                    href: `/campanha/${c.campaign_id}/0`
                                 }))}
                             />
                         ) : (
@@ -108,7 +108,7 @@ const Taverna = () => {
                                 items={myCamp.map(c => ({
                                     name: c.name,
                                     code: c.campaign_id,
-                                    href: `/campanha`
+                                    href: `/campanha/${c.campaign_id}/1`
                                 }))}
                             />
                         ) : (
@@ -135,8 +135,10 @@ const Taverna = () => {
                             </div>
                         </>
                     )}
-                    <div className="bottom-button_button" onClick={openOptions}>
-                        +
+                    <div className="main_add-button" onClick={open}>
+                        <span class="material-symbols-outlined">
+                            add
+                        </span>
                     </div>
                 </div>
             </main>

@@ -22,6 +22,11 @@ const Campanha = () => {
 
     const [dado, setDado] = useState(1);
     const [tipoDado, setTipoDado] = useState(4);
+    const { campId, isMaster } = useParams();
+
+    useEffect(()=>{
+        setMaster(isMaster == 1 ? true : false)
+    })
 
     function girar() {
         setDado(Math.floor(Math.random() * tipoDado) + 1);
