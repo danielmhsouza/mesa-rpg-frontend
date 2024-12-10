@@ -25,7 +25,7 @@ const OptionsScroll = (props) => {
             fn: openModal
         },
         {
-            name: "Iventário",
+            name: "Inventário",
             icon: "personal_bag",
             fn: openModal
         },
@@ -40,16 +40,6 @@ const OptionsScroll = (props) => {
         {
             name: "Jogadores",
             icon: "handshake",
-            fn: openModal
-        },
-        {
-            name: "Inimigos",
-            icon: "star",
-            fn: openModal
-        },
-        {
-            name: "Atributos",
-            icon: "account_tree",
             fn: openModal
         },
         {

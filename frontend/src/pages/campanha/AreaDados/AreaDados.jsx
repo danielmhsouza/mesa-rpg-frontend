@@ -20,7 +20,6 @@ const AreaDados = (props) => {
                     <option>20</option>
                 </select>
                 <button className="button-orange" onClick={props.girar}>Girar</button>
-                <button className="button" onClick={props.ms}>Ver como mestre</button>
             </div>
         </>
     )

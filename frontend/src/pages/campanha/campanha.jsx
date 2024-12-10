@@ -30,10 +30,7 @@ const Campanha = () => {
     function open() {
         window.alert("abriu");
     }
-    function ms() {
-        setMaster(!master);
-    }
-
+   
     return (
         <>
             <Header backto="/taverna" name="Campanha" arrow={true} />
@@ -42,7 +39,7 @@ const Campanha = () => {
 
                 <OptionsScroll master={master} />
 
-                <AreaDados dado={dado} setTipoDado={setTipoDado} girar={girar} ms={ms}/>
+                <AreaDados dado={dado} setTipoDado={setTipoDado} girar={girar}/>
 
                 {
                     master ?
