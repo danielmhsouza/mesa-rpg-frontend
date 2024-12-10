@@ -135,7 +135,7 @@ const Taverna = () => {
                             </div>
                         </>
                     )}
-                    <div className="main_add-button" onClick={open}>
+                    <div className="main_add-button" onClick={openOptions}>
                         <span class="material-symbols-outlined">
                             add
                         </span>

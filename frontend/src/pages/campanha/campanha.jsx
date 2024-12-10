@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import Header from "../../components/Header";
 import { route, frontRoute } from "../../assets/route";
 import List from "../../components/List/List";
@@ -8,6 +8,7 @@ import Topo from "./Topo/Topo";
 import OptionsScroll from "./OptionsScroll/OptionsScroll";
 import "./campanha.scss";
 import AreaDados from "./AreaDados/AreaDados";
+import { useParams } from "react-router-dom";
 
 
 const Campanha = () => {
