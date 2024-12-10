@@ -8,6 +8,7 @@ import Topo from "./Topo/Topo";
 import OptionsScroll from "./OptionsScroll/OptionsScroll";
 import "./campanha.scss";
 import AreaDados from "./AreaDados/AreaDados";
+import {useParams} from "react-router-dom";
 
 
 const Campanha = () => {

@@ -27,7 +27,7 @@ function App() {
       <Route path='/campanha/:campId/:isMaster' element={<Campanha />} />
       <Route path='/entrarcampanha' element={<EntrarCampanha />} />
       <Route path='/criarcampanha' element={<CriarCampanha />} />
-      <Route path='/criarpersonagem' element={<CriarPersonagem />} />
+      <Route path='/criarpersonagem/:campId' element={<CriarPersonagem />} />
     </Routes>
    </BrowserRouter>
   );

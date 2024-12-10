@@ -10,15 +10,13 @@ const Taverna = () => {
     const [user, setUser] = useState({});
     const [load, setLoad] = useState(false);
     const [campaigns, setCampaigns] = useState([]); // Todas as campanhas
-    const [myCamp, setMyCamp] = useState({});
-    const [camp, setCamp] = useState({});
+    const [myCamp, setMyCamp] = useState([]);
+    const [camp, setCamp] = useState([]);
     const [options, setOptions] = useState(false);
 
     // Busca os dados do usuário e as campanhas ao montar o componente
     useEffect(() => {
-        if (sessionStorage.getItem('entry_campaign')) {
-            return
-        }
+        
         const userId = sessionStorage.getItem("user_id");
         const userName = sessionStorage.getItem("user_name");
 
@@ -135,7 +133,7 @@ const Taverna = () => {
                             </div>
                         </>
                     )}
-                    <div className="main_add-button" onClick={open}>
+                    <div className="main_add-button" onClick={openOptions}>
                         <span class="material-symbols-outlined">
                             add
                         </span>
