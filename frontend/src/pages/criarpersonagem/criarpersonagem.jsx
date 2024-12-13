@@ -5,6 +5,8 @@ import Options from "../../components/Options/Options";
 import Status from "./Status";
 import { useParams } from "react-router-dom";
 import './criarpersonagem.scss';
+import axios from "axios";
+import { route } from "../../assets/route";
 
 const CriarPersonagem = () => {
     const [imglnk, setImgLink] = useState('');
@@ -12,6 +14,7 @@ const CriarPersonagem = () => {
     const [classes] = useState(['Mago', 'Lutador', 'Ladino', 'Clérigo', 'Bardo', 'Ranger']);
     const [selectedRace, setSelectedRace] = useState('');
     const [selectedClass, setSelectedClass] = useState('');
+    const [characterName, setCharacterName] = useState('');
     const [loading, setLoading] = useState(false);
     const [attributes, setAttributes] = useState({
         "Força": 10,
@@ -87,9 +90,34 @@ const CriarPersonagem = () => {
     async function createCharacter() {
         setLoading(true);
         try{
-
-            setLoading(false);
-            window.location.href = '/taverna'
+            const data = {
+                name: characterName,
+                race: selectedRace,
+                classe: selectedClass,
+                img_link: imglnk,
+                force: attributes["Força"],
+                carisma: attributes["Carisma"],
+                destreza: attributes["Destreza"],
+                constituicaio: attributes["Constituição"],
+                inteligencia: attributes["Inteligência"],
+                sabedoria: attributes["Sabedoria"],
+                armadura: stats["Armadura"],
+                iniciativa: stats["Iniciativa"],
+                deslocamento: stats["Deslocamento"],
+                pontos_vida: stats["Pontos de Vida"],
+                bonus_proef: stats["Bonus Proef."],
+                inspiracao: stats["Inspiração"],
+                camp_id: campId,
+                user_id: sessionStorage.getItem('user_id')
+            }
+            console.log(data)
+            const response = await axios.post(`${route}/criar-personagem`, data);
+            if(response.data.message){
+                setLoading(false);
+                window.alert(response.data.message);
+                window.location.href = '/taverna';
+            }
+            window.alert(response.data.error);
         }catch(e){
             console.log(e);
             setLoading(false);
@@ -105,7 +133,8 @@ const CriarPersonagem = () => {
                 <div className="main_body">
                     <div className="main_body_inputs">
                         <div className="main_body_inputs_left-side">
-                            <input type="text" className="input-general" placeholder="Nome do Personagem" />
+                            <input type="text" className="input-general" placeholder="Nome do Personagem"
+                            onChange={(e)=>{setCharacterName(e.target.value)}} />
                             <input
                                 type="text"
                                 className="input-general"
