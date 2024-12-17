@@ -31,11 +31,10 @@ const Cadastro = () => {
                     conf_pass: confPass
                 },
                 {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: false
                 });
-            if (response.statusCode == 200) {
+            if (response.status == 200) {
                 setError2(false);
                 window.location.href = `${frontRoute}/home`
             } else {
@@ -52,7 +51,7 @@ const Cadastro = () => {
     return (
         <>
             <Loading run={load} />
-            <Header backto={'/home'} name={'Cadastro'} arrow={true}/>
+            <Header backto={'/home'} name={'Cadastro'} arrow={true} />
 
             <main className="main-cadastro">
                 <div className="form">
@@ -74,8 +73,8 @@ const Cadastro = () => {
                         Cadastrar
                     </button>
 
-                    { error2 ? <p>Email já cadastrado.</p> : null }
-                    { error ? <p>Senhas Diferentes.</p> : null }
+                    {error2 ? <p>Email já cadastrado.</p> : null}
+                    {error ? <p>Senhas Diferentes.</p> : null}
                 </div>
             </main>
         </>

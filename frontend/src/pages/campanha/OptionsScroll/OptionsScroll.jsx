@@ -92,15 +92,28 @@ const OptionsScroll = ({ master, characters, missions, items }) => {
         }
     };
 
+    const showPlayers = () => {
+        openModal(
+            "Jogadores",
+            <ul>
+                {characters.map((item, index) => (
+                    <li key={index} style={{ marginBottom: "10px" }}>
+                        <strong>{item.name}:</strong>
+                    </li>
+                ))}
+            </ul>
+        );
+    }
+
     const itemsPlayer = [
-        { name: "Jogadores", icon: "handshake", fn: () => openModal("Jogadores", "Conteúdo de jogadores") },
+        { name: "Jogadores", icon: "handshake", fn: showPlayers },
         { name: "Atributos", icon: "account_tree", fn: showAttributes },
         { name: "Inventário", icon: "personal_bag", fn: showItems },
         { name: "Missões", icon: "receipt_long", fn: showMissions },
     ];
 
     const itemsMaster = [
-        { name: "Jogadores", icon: "handshake", fn: () => openModal("Jogadores", "Conteúdo de jogadores") },
+        { name: "Jogadores", icon: "handshake", fn: showPlayers },
         { name: "Itens", icon: "personal_bag", fn: showItems },
         { name: "Missões", icon: "receipt_long", fn: showMissions },
     ];

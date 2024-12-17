@@ -17,7 +17,11 @@ const EntrarCampanha = () => {
             return;
         }
         try {
-            const response = await axios.get(`${route}/campanha?id=${id}`);
+            const response = await axios.get(`${route}/campanha?id=${id}`,
+            {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: false
+            });
             if (response.status == 200) {
                 setCamp(response.data);
             }

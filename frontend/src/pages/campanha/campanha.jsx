@@ -43,9 +43,17 @@ const Campanha = () => {
 
             try {
                 const charResponse = isMaster ?
-                    await axios.get(`${route}/personagem?campaign_id=${campId}`)
+                    await axios.get(`${route}/personagem?campaign_id=${campId}`,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                        withCredentials: false
+                    })
                     :
-                    await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`);
+                    await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                        withCredentials: false
+                    });
                     
                 setCharacters(charResponse.data.characters || []);
 

@@ -15,8 +15,11 @@ export default function Home() {
         try {
             let url = `${route}/login`;
             
-            const response = await axios.post(url, {email: email, password: pass}, 
-                {headers:{'Content-Type': 'application/json'}});
+            const response = await axios.post(url, {email: email, password: pass},
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: false
+                });
             if (response.data.user_id) {
                 setError(false);
                 setError2(false);

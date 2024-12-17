@@ -23,7 +23,11 @@ const CriarCampanha = () => {
                 img_link: linkimg,
                 user_id: sessionStorage.getItem('user_id')
             }
-            const response = await axios.post(`${route}/criar-campanha`, data);
+            const response = await axios.post(`${route}/criar-campanha`, data,
+            {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: false
+            });
             console.log(response.data);
             console.log(response.status);
             if(response.status == 200){

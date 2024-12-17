@@ -111,7 +111,11 @@ const CriarPersonagem = () => {
                 user_id: sessionStorage.getItem('user_id')
             }
             console.log(data)
-            const response = await axios.post(`${route}/criar-personagem`, data);
+            const response = await axios.post(`${route}/criar-personagem`, data,
+            {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: false
+            });
             if(response.data.message){
                 setLoading(false);
                 window.alert(response.data.message);
