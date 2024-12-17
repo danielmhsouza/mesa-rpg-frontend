@@ -36,6 +36,20 @@ const OptionsScroll = ({ master, characters, missions = [], items = [] }) => {
                         <p><strong>Level:</strong> {char.level}</p>
                         <p><strong>Classe:</strong> {char.class}</p>
                         <p><strong>Raça:</strong> {char.race}</p>
+                        <p><strong>Dinheiro:</strong> {char.money}</p>
+                        <p><strong>Força:</strong> {char.force}</p>
+                        <p><strong>Destreza:</strong> {char.dest}</p>
+                        <p><strong>Constituição:</strong> {char.consti}</p>
+                        <p><strong>Inteligência:</strong> {char.intel}</p>
+                        <p><strong>Sabedoria:</strong> {char.wisdom}</p>
+                        <p><strong>Carisma:</strong> {char.charisma}</p>
+                        <p><strong>Armadura:</strong> {char.armor}</p>
+                        <p><strong>Iniciativa:</strong> {char.initi}</p>
+                        <p><strong>Deslocamento:</strong> {char.desloc}</p>
+                        <p><strong>HP:</strong> {char.hp}</p>
+                        <p><strong>Mana:</strong> {char.mana}</p>
+                        <p><strong>Bônus de Proficiência:</strong> {char.b_proef}</p>
+                        <p><strong>Inspiração:</strong> {char.inspiration}</p>
                     </div>
                 ))
             ) : (
