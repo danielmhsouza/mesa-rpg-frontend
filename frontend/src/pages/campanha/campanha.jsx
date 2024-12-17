@@ -45,7 +45,7 @@ const Campanha = () => {
             const user_id = sessionStorage.getItem("user_id");
 
             try {
-                if (isMaster) {
+                if (isMaster == 1) {
                     const charResponse = await axios.get(`${route}/personagem?campaign_id=${campId}`,
                         {
                             headers: { "Content-Type": "application/json" },
