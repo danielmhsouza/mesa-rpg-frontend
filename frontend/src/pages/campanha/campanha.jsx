@@ -42,7 +42,11 @@ const Campanha = () => {
             const user_id = sessionStorage.getItem("user_id");
 
             try {
-                const charResponse = await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`);
+                const charResponse = isMaster ?
+                    await axios.get(`${route}/personagem?campaign_id=${campId}`)
+                    :
+                    await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`);
+                    
                 setCharacters(charResponse.data.characters || []);
 
                 if (charResponse.data.characters && charResponse.data.characters.length > 0) {
