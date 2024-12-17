@@ -6,6 +6,7 @@ import Topo from "./Topo/Topo";
 import OptionsScroll from "./OptionsScroll/OptionsScroll";
 import "./campanha.scss";
 import AreaDados from "./AreaDados/AreaDados";
+import Modal from "../../components/Modal/Modal"; // Importa o modal
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -24,6 +25,10 @@ const Campanha = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [options, setOptions] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [formData, setFormData] = useState({ name: "", description: "" });
 
     const [dado, setDado] = useState(1);
     const [tipoDado, setTipoDado] = useState(4);
@@ -66,6 +71,43 @@ const Campanha = () => {
 
     const openOptions = () => setOptions(!options);
 
+    // Abre o modal e reseta os campos do formulário
+    const openModal = (title) => {
+        setModalTitle(title);
+        setFormData({ name: "", description: "" });
+        setShowModal(true);
+    };
+
+    const closeModal = () => setShowModal(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSave = async () => {
+        const category = modalTitle === "Criar Item" ? 0 : 1; // Define a categoria dinamicamente
+    
+        const payload = {
+            name: formData.name,
+            description: formData.description,
+            category: category,
+            campaign_id: campId, // Id da campanha (já disponível via useParams)
+        };
+    
+        try {
+            const response = await axios.post(`${route}/artefato`, payload);
+            console.log("Resposta do servidor:", response.data);
+    
+            closeModal(); // Fecha o modal
+        } catch (error) {
+            console.error("Erro ao salvar:", error.response?.data || error.message);
+        }
+    };
+
+    
+    
+
     return (
         <>
             <Header backto="/taverna" name="Campanha" arrow={true} />
@@ -89,13 +131,19 @@ const Campanha = () => {
                     <div className="bottom-button">
                         {options && (
                             <>
-                                <div className="bottom-button_item">
+                                <div
+                                    className="bottom-button_item"
+                                    onClick={() => openModal("Criar Item")}
+                                >
                                     <span className="material-symbols-outlined">add_circle</span>
-                                    <a href="/criaritem">Criar Item</a>
+                                    <a href="#">Criar Item</a>
                                 </div>
-                                <div className="bottom-button_item">
+                                <div
+                                    className="bottom-button_item"
+                                    onClick={() => openModal("Criar Missão")}
+                                >
                                     <span className="material-symbols-outlined">assignment</span>
-                                    <a href="/criarmissao">Criar Missão</a>
+                                    <a href="#">Criar Missão</a>
                                 </div>
                             </>
                         )}
@@ -105,6 +153,33 @@ const Campanha = () => {
                     </div>
                 )}
             </div>
+
+            {/* Modal */}
+            <Modal show={showModal} onClose={closeModal} title={modalTitle}>
+                <div className="modal-form">
+                    <label>Nome:</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Digite o nome"
+                    />
+
+                    <label>Descrição:</label>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Digite a descrição"
+                        rows="4"
+                    ></textarea>
+
+                    <button className="button-orange" onClick={handleSave}>
+                        Salvar
+                    </button>
+                </div>
+            </Modal>
         </>
     );
 };
