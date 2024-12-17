@@ -3,10 +3,11 @@ import "./optionsscroll.scss";
 import Item from "./Item";
 import Modal from "../../../components/Modal/Modal";
 
-const OptionsScroll = ({ master, characters, missions, items }) => {
+const OptionsScroll = ({ master, characters, missions = [], items = [] }) => {
     const [showModal, setShowModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const openModal = (title, content) => {
         setModalTitle(title);
@@ -20,90 +21,90 @@ const OptionsScroll = ({ master, characters, missions, items }) => {
     };
 
     // Função para exibir atributos do personagem
-    const showAttributes = () =>
+    const showAttributes = () => {
         openModal(
             "Atributos",
-            characters.map((char, index) => (
-                <div key={index} style={{ marginBottom: "20px" }}>
-                    <img
-                        src={char.img_link}
-                        alt={char.name}
-                        style={{ width: "150px", borderRadius: "8px" }}
-                    />
-                    <p><strong>Nome:</strong> {char.name}</p>
-                    <p><strong>Level:</strong> {char.level}</p>
-                    <p><strong>Classe:</strong> {char.class}</p>
-                    <p><strong>Raça:</strong> {char.race}</p>
-                    <p><strong>Dinheiro:</strong> {char.money}</p>
-                    <p><strong>Força:</strong> {char.force}</p>
-                    <p><strong>Destreza:</strong> {char.dest}</p>
-                    <p><strong>Constituição:</strong> {char.consti}</p>
-                    <p><strong>Inteligência:</strong> {char.intel}</p>
-                    <p><strong>Sabedoria:</strong> {char.wisdom}</p>
-                    <p><strong>Carisma:</strong> {char.charisma}</p>
-                    <p><strong>Armadura:</strong> {char.armor}</p>
-                    <p><strong>Iniciativa:</strong> {char.initi}</p>
-                    <p><strong>Deslocamento:</strong> {char.desloc}</p>
-                    <p><strong>HP:</strong> {char.hp}</p>
-                    <p><strong>Mana:</strong> {char.mana}</p>
-                    <p><strong>Bônus de Proficiência:</strong> {char.b_proef}</p>
-                    <p><strong>Inspiração:</strong> {char.inspiration}</p>
-                </div>
-            ))
+            characters.length > 0 ? (
+                characters.map((char, index) => (
+                    <div key={index} style={{ marginBottom: "20px" }}>
+                        <img
+                            src={char.img_link}
+                            alt={char.name}
+                            style={{ width: "150px", borderRadius: "8px" }}
+                        />
+                        <p><strong>Nome:</strong> {char.name}</p>
+                        <p><strong>Level:</strong> {char.level}</p>
+                        <p><strong>Classe:</strong> {char.class}</p>
+                        <p><strong>Raça:</strong> {char.race}</p>
+                    </div>
+                ))
+            ) : (
+                <p>Nenhum personagem encontrado.</p>
+            )
         );
+    };
 
     // Função para exibir missões
-    const showMissions = () =>
-        openModal(
-            "Missões",
-            <ul>
-                {missions.map((mission, index) => (
-                    <li key={index} style={{ marginBottom: "10px" }}>
-                        <strong>{mission.name}:</strong> {mission.description}
-                    </li>
-                ))}
-            </ul>
-        );
+    const showMissions = () => {
+        setLoading(true);
+        setTimeout(() => {
+            openModal(
+                "Missões",
+                missions.length > 0 ? (
+                    <ul>
+                        {missions.map((mission, index) => (
+                            <li key={index} style={{ marginBottom: "10px" }}>
+                                <strong>{mission.name}:</strong> {mission.desc}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Nenhuma missão encontrada.</p>
+                )
+            );
+            setLoading(false);
+        }, 500);
+    };
 
     // Função para exibir itens
     const showItems = () => {
-        if (master) {
-            // Mestre vê os itens em lista detalhada
+        setLoading(true);
+        setTimeout(() => {
             openModal(
                 "Itens",
-                <ul>
-                    {items.map((item, index) => (
-                        <li key={index} style={{ marginBottom: "10px" }}>
-                            <strong>{item.name}:</strong> {item.description}
-                        </li>
-                    ))}
-                </ul>
+                items.length > 0 ? (
+                    <ul>
+                        {items.map((item, index) => (
+                            <li key={index} style={{ marginBottom: "10px" }}>
+                                <strong>{item.name}:</strong> {item.desc}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Nenhum item encontrado.</p>
+                )
             );
-        } else {
-            // Jogador vê os itens como lista simples
-            openModal(
-                "Inventário",
-                <ul>
-                    {items.map((item, index) => (
-                        <li key={index}>{item.name}</li>
-                    ))}
-                </ul>
-            );
-        }
+            setLoading(false);
+        }, 500);
     };
 
+    // Função para exibir jogadores
     const showPlayers = () => {
         openModal(
             "Jogadores",
-            <ul>
-                {characters.map((item, index) => (
-                    <li key={index} style={{ marginBottom: "10px" }}>
-                        <strong>{item.name}:</strong>
-                    </li>
-                ))}
-            </ul>
+            characters.length > 0 ? (
+                <ul>
+                    {characters.map((item, index) => (
+                        <li key={index} style={{ marginBottom: "10px" }}>
+                            <strong>{item.name}</strong>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>Nenhum jogador encontrado.</p>
+            )
         );
-    }
+    };
 
     const itemsPlayer = [
         { name: "Jogadores", icon: "handshake", fn: showPlayers },
@@ -122,7 +123,7 @@ const OptionsScroll = ({ master, characters, missions, items }) => {
         <>
             {/* Modal */}
             <Modal show={showModal} onClose={closeModal} title={modalTitle}>
-                <div className="modal-dynamic-content">{modalContent}</div>
+                {loading ? <p>Carregando...</p> : <div className="modal-dynamic-content">{modalContent}</div>}
             </Modal>
 
             {/* Lista de opções */}

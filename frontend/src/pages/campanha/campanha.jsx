@@ -42,19 +42,13 @@ const Campanha = () => {
             const user_id = sessionStorage.getItem("user_id");
 
             try {
-                const charResponse = isMaster ?
-                    await axios.get(`${route}/personagem?campaign_id=${campId}`,
-                    {
-                        headers: { "Content-Type": "application/json" },
-                        withCredentials: false
-                    })
-                    :
-                    await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`,
-                    {
-                        headers: { "Content-Type": "application/json" },
-                        withCredentials: false
-                    });
-                    
+                // Buscar personagens
+                const charResponse = isMaster
+                    ? await axios.get(`${route}/personagem?campaign_id=${campId}`)
+                    : await axios.get(
+                          `${route}/personagem?campaign_id=${campId}&user_id=${user_id}`
+                      );
+
                 setCharacters(charResponse.data.characters || []);
 
                 if (charResponse.data.characters && charResponse.data.characters.length > 0) {
@@ -67,6 +61,9 @@ const Campanha = () => {
                         level: char.level,
                     });
                 }
+
+                // Buscar artefatos (itens e missões)
+                fetchArtifacts();
             } catch (error) {
                 console.error("Erro ao buscar dados:", error.response?.data || error.message);
             } finally {
@@ -77,6 +74,20 @@ const Campanha = () => {
         fetchData();
     }, [campId, isMaster]);
 
+    // Função para buscar artefatos
+    const fetchArtifacts = async () => {
+        try {
+            const response = await axios.get(`${route}/artefato?campaign_id=${campId}`);
+            const artifacts = response.data.artifacts || [];
+
+            setItems(artifacts.filter((artifact) => artifact.category === 0));
+            setMissions(artifacts.filter((artifact) => artifact.category === 1));
+        } catch (error) {
+            console.error("Erro ao buscar artefatos:", error.response?.data || error.message);
+        }
+    };
+
+    // Girar dado
     function girar() {
         setDado(Math.floor(Math.random() * tipoDado) + 1);
     }
@@ -98,27 +109,25 @@ const Campanha = () => {
     };
 
     const handleSave = async () => {
-        const category = modalTitle === "Criar Item" ? 0 : 1; // Define a categoria dinamicamente
-    
+        const category = modalTitle === "Criar Item" ? 0 : 1;
+
         const payload = {
             name: formData.name,
             description: formData.description,
             category: category,
-            campaign_id: campId, // Id da campanha (já disponível via useParams)
+            campaign_id: campId,
         };
-    
+
         try {
             const response = await axios.post(`${route}/artefato`, payload);
             console.log("Resposta do servidor:", response.data);
-    
-            closeModal(); // Fecha o modal
+
+            fetchArtifacts(); // Atualiza os artefatos após salvar
+            closeModal();
         } catch (error) {
             console.error("Erro ao salvar:", error.response?.data || error.message);
         }
     };
-
-    
-    
 
     return (
         <>
