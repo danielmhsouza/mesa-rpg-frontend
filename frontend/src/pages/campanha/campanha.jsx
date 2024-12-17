@@ -19,6 +19,8 @@ const Campanha = () => {
         level: 0,
     });
 
+    const [campData, setCampData] = useState({});
+
     const [master, setMaster] = useState(false);
     const [characters, setCharacters] = useState([]);
     const [missions, setMissions] = useState([]);
@@ -28,7 +30,8 @@ const Campanha = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
-    const [formData, setFormData] = useState({ name: "", description: "" });
+    const [artifactName, setArtifactName] = useState();
+    const [artifactDesc, setArtifactDesc] = useState();
 
     const [dado, setDado] = useState(1);
     const [tipoDado, setTipoDado] = useState(4);
@@ -42,24 +45,43 @@ const Campanha = () => {
             const user_id = sessionStorage.getItem("user_id");
 
             try {
-                // Buscar personagens
-                const charResponse = isMaster
-                    ? await axios.get(`${route}/personagem?campaign_id=${campId}`)
-                    : await axios.get(
-                          `${route}/personagem?campaign_id=${campId}&user_id=${user_id}`
-                      );
+                if (isMaster) {
+                    const charResponse = await axios.get(`${route}/personagem?campaign_id=${campId}`,
+                        {
+                            headers: { "Content-Type": "application/json" },
+                            withCredentials: false
+                        });
 
-                setCharacters(charResponse.data.characters || []);
+                    const campData = await axios.get(`${route}/campanha?id=${campId}`,
+                        {
+                            headers: { "Content-Type": "application/json" },
+                            withCredentials: false
+                        });
 
-                if (charResponse.data.characters && charResponse.data.characters.length > 0) {
-                    const char = charResponse.data.characters[0];
-                    setPlayer({
-                        name: char.name,
-                        img: char.img_link,
-                        life: char.hp,
-                        mana: char.mana,
-                        level: char.level,
-                    });
+                    setCampData(campData.data);
+                    setCharacters(charResponse.data.characters || []);
+
+                } else {
+
+
+                    const charResponse = await axios.get(`${route}/personagem?campaign_id=${campId}&user_id=${user_id}`,
+                        {
+                            headers: { "Content-Type": "application/json" },
+                            withCredentials: false
+                        });
+
+                    setCharacters(charResponse.data.characters || []);
+
+                    if (charResponse.data.characters && charResponse.data.characters.length > 0) {
+                        const char = charResponse.data.characters[0];
+                        setPlayer({
+                            name: char.name,
+                            img: char.img_link,
+                            life: char.hp,
+                            mana: char.mana,
+                            level: char.level,
+                        });
+                    }
                 }
 
                 // Buscar artefatos (itens e missões)
@@ -97,43 +119,44 @@ const Campanha = () => {
     // Abre o modal e reseta os campos do formulário
     const openModal = (title) => {
         setModalTitle(title);
-        setFormData({ name: "", description: "" });
         setShowModal(true);
     };
 
     const closeModal = () => setShowModal(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-
     const handleSave = async () => {
-        const category = modalTitle === "Criar Item" ? 0 : 1;
-
+        const category = modalTitle === "Criar Item" ? 0 : 1; // Define a categoria dinamicamente
+    
         const payload = {
-            name: formData.name,
-            description: formData.description,
+            name: artifactName,
+            description: artifactDesc,
             category: category,
             campaign_id: campId,
         };
 
         try {
-            const response = await axios.post(`${route}/artefato`, payload);
+            const response = await axios.post(`${route}/artefato`, payload,
+            {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: false
+            });
             console.log("Resposta do servidor:", response.data);
-
-            fetchArtifacts(); // Atualiza os artefatos após salvar
-            closeModal();
+    
+            closeModal(); // Fecha o modal
         } catch (error) {
             console.error("Erro ao salvar:", error.response?.data || error.message);
         }
     };
 
+    
+    
+
     return (
         <>
             <Header backto="/taverna" name="Campanha" arrow={true} />
             <div className="main">
-                <Topo master={master} img={player.img} player={player} />
+
+                <Topo master={master} campData={ campData } player={player} />
 
                 {loading ? (
                     <Loading run={loading} />
@@ -182,16 +205,14 @@ const Campanha = () => {
                     <input
                         type="text"
                         name="name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        onChange={ (e) => {setArtifactName(e.target.value); console.log(e.target.value)} }
                         placeholder="Digite o nome"
                     />
 
                     <label>Descrição:</label>
                     <textarea
                         name="description"
-                        value={formData.description}
-                        onChange={handleChange}
+                        onChange={ (e) => {setArtifactDesc(e.target.value); console.log(e.target.value)} }
                         placeholder="Digite a descrição"
                         rows="4"
                     ></textarea>

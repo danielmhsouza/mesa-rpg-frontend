@@ -9,7 +9,7 @@ const Topo = (props) => {
                 <div className="topo_img-area">
                     {
                         props.master ?
-                            <img src={props.img} alt="img" />
+                            <img src={props.campData.img_link} alt="img" />
                             :
                             <>
                                 <img src={props.player.img} alt="img" />
@@ -20,7 +20,7 @@ const Topo = (props) => {
                 {
                     props.master ?
                         <div className="topo_camp-name">
-                            <h3>Nome da Campanha</h3>
+                            <h3>{ props.campData.name }</h3>
                         </div>
                         :
                         <div className="topo_status-area">
